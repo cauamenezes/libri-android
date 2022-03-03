@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import model.Item;
+import model.Livro;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
@@ -201,16 +202,38 @@ public class SQLHelper extends SQLiteOpenHelper {
 
         try {
 
+            //cursor é tipo o foreach, ele lê as linhas da tabela até elas acabarem
             if (cursor.moveToFirst()) {
-                
+
+                //o while é uma estrutura pré-teste, por validar a condição antes da execução
+                //já o do while é pós-teste, por executar os comandos e depois fazer os testes.
+                do {
+
+                    Livro livro = new Livro(cursor.getString(cursor.getColumnIndex("titulo")),
+                            cursor.getString(cursor.getColumnIndex("descricao"))
+                    );
+
+                    items.add(new Item(0, livro));
+
+                } while (cursor.moveToNext());
+
             }
 
         } catch (Exception e) {
 
+            Log.d("SQLITERROR:", e.getMessage());
+
     } finally {
 
-        }
-    }
+            if (cursor != null && !cursor.isClosed()) {
 
+                cursor.close();
+
+            }
+        }
+
+        return items;
+
+    }
 
 }//FECHAMENTO DA CLASSE

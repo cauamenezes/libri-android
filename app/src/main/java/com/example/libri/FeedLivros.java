@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
+import model.Item;
 import model.Livro;
 
 public class FeedLivros extends AppCompatActivity {
@@ -69,9 +72,27 @@ public class FeedLivros extends AppCompatActivity {
     /** ADAPTER DO RECYCLERVIEW **/
     class LivroAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+        //ATRIBUTO QUE RECEBE OS OBJETOS DE "ITEMS"
+        public List<Item> item;
+
+        //CONSTRUTOR DA CLASSE LivroAdapter
+        public LivroAdapter(List<Item> item) {
+
+            this.item = item;
+
+        }
+
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+            if (viewType == 0){
+
+                return new LivroAdapter.LivroViewHolder();
+
+            }
+
+
             return null;
         }
 
