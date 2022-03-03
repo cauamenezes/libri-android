@@ -9,7 +9,11 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import model.Item;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
@@ -184,8 +188,29 @@ public class SQLHelper extends SQLiteOpenHelper {
 
         return 0;
 
-    }
+    } //FIM DO MÉTODO DE LOGIN
 
+    /** LISTAGEM DE LIVROS **/
+    public List<Item> listBook(){
+
+        List<Item> items = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM tbl_livros WHERE cod_usuario = ?", new String[]{"1"});
+
+        try {
+
+            if (cursor.moveToFirst()) {
+                
+            }
+
+        } catch (Exception e) {
+
+    } finally {
+
+        }
+    }
 
 
 }//FECHAMENTO DA CLASSE

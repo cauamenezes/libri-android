@@ -2,12 +2,18 @@ package com.example.libri;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import model.Livro;
 
 public class FeedLivros extends AppCompatActivity {
 
@@ -52,4 +58,59 @@ public class FeedLivros extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+// A RecyclerView exige uma classe chamada Adapter, primária, que guarda dentro dela outra classe, secundária.
+// A primária sempre será a ViewHolder que define, prepara as estruturas necessárias para a injeção dos dados.
+// Já a secundária será a Adapter que, de fato, injeta os dados vindos, normalmente, de um banco de dados, na estrutura gráfica (.xml).
+
+    //onCreateViewHolder: inicializa a classe ViewHolder dentro do Adapter.
+    //onBindViewHolder: associa os objetos da ViewHolder aos dados.
+    //getItemCount: quantidade de itens da listagem.
+
+    /** ADAPTER DO RECYCLERVIEW **/
+    class LivroAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
+        }
+
+        /** VIEWHOLDER **/
+        class LivroViewHolder extends RecyclerView.ViewHolder {
+
+            private TextView textLivroTitulo, textLivroDescricao;
+            private int cod_livro;
+
+            /** MÉTODO CONSTRUTOR DA VIEWHOLDER **/
+            public LivroViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                textLivroTitulo = itemView.findViewById(R.id.textLivroTitulo);
+                textLivroDescricao = itemView.findViewById(R.id.textLivroDescricao);
+
+            }
+
+            /** MÉTODO DE SET DE DADOS NAS TEXTVIEWS **/
+            public void setLivroData(Livro livro) {
+
+                textLivroTitulo.setText(livro.getTitulo());
+                textLivroDescricao.setText(livro.getDescricao());
+
+            }
+
+        } /** FIM VIEWHOLDER**/
+
+    } /** FIM DA ADAPTER **/
+
 }
+
